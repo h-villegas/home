@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8thMATH Terminal</title>
+    <style>
+        body {
+            background-color: black;
+            color: green;
+            font-family: monospace;
+            margin: 0;
+            padding: 0;
+        }
+        #terminal {
+            padding: 20px;
+        }
+        .output {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="terminal">
+        <p>Type "help" to see commands</p>
+        <div id="output-container"></div>
+        <div>
+            <span>8thMATH &gt; </span><input type="text" id="input" autocomplete="off" style="background-color: black; color: green; border: none; outline: none;" />
+        </div>
+    </div>
+
+    <script>
+        const outputContainer = document.getElementById('output-container');
+        const input = document.getElementById('input');
+
+        const commands = {
+            help: `Available commands:<br>
+                Desmos - https://www.desmos.com/testing/texas/graphing<br>
+                Formative - https://app.formative.com/<br>
+                Google Drive (GD) - https://drive.google.com/drive/recent<br>
+                Grade Change (GCH) - https://docs.google.com/forms/d/e/1FAIpQLSehGcTtIP10CTMwtC2aHW4sC1OQeeokcjXDo8QT20XyHAvcMQ/viewform?pli=1<br>
+                NWEA - https://docs.google.com/forms/d/e/1FAIpQLScyV7Lf0YXHSftRFRJRLqEy_Xz6W4rjo_XcXKcyji3a4F-ing/viewform<br>
+                AGC - math-is-fun-and-so-is-life.github.io/start`,
+            desmos: 'https://www.desmos.com/testing/texas/graphing',
+            formative: 'https://app.formative.com/',
+            'google drive': 'https://drive.google.com/drive/recent',
+            gd: 'https://drive.google.com/drive/recent',
+            'grade change': 'https://docs.google.com/forms/d/e/1FAIpQLSehGcTtIP10CTMwtC2aHW4sC1OQeeokcjXDo8QT20XyHAvcMQ/viewform?pli=1',
+            gch: 'https://docs.google.com/forms/d/e/1FAIpQLSehGcTtIP10CTMwtC2aHW4sC1OQeeokcjXDo8QT20XyHAvcMQ/viewform?pli=1',
+            nwea: 'https://docs.google.com/forms/d/e/1FAIpQLScyV7Lf0YXHSftRFRJRLqEy_Xz6W4rjo_XcXKcyji3a4F-ing/viewform',
+            agc: 'https://math-is-fun-and-so-is-life.github.io/start',
+        };
+
+        input.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                const userInput = input.value.trim().toLowerCase();
+                input.value = '';
+
+                if (commands[userInput]) {
+                    if (userInput === 'help') {
+                        outputContainer.innerHTML += `<div class="output">${commands[userInput]}</div>`;
+                    } else {
+                        window.open(commands[userInput], '_blank');
+                    }
+                } else {
+                    outputContainer.innerHTML += `<div class="output">Unknown command: ${userInput}</div>`;
+                }
+
+                outputContainer.scrollTop = outputContainer.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
